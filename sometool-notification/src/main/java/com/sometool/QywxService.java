@@ -8,7 +8,9 @@ import com.sometool.dto.vo.QywxMessageVo;
 import okhttp3.*;
 import org.apache.commons.lang3.ObjectUtils;
 
-
+/**
+ * 企业微信api
+ */
 public class QywxService {
 
     /**
@@ -46,6 +48,7 @@ public class QywxService {
 
     /**
      * 发送应用通知
+     * 必填参数：agentId，message，toUser or toUserList，CORP_ID，CORP_SECRET
      *
      * @param req
      * @return
