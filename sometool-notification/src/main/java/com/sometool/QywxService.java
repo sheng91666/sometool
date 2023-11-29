@@ -9,9 +9,11 @@ import okhttp3.*;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * 企业微信api
+ * 企业微信服务
+ * 消息通知api文档 https://developer.work.weixin.qq.com/document/path/90236#%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89
  */
 public class QywxService {
+
 
     /**
      * 获取access token
@@ -47,7 +49,7 @@ public class QywxService {
     }
 
     /**
-     * 发送应用通知
+     * 发送文本应用通知
      * 必填参数：agentId，message，toUser or toUserList，CORP_ID，CORP_SECRET
      *
      * @param req
@@ -68,6 +70,38 @@ public class QywxService {
             throw new Exception("need toUser or toUserList");
         }
 
+        QywxMessageVo messageVo = sendMessage(paramReq);
+        return messageVo;
+    }
+
+
+    /**
+     * 发送文本卡片应用通知
+     * 必填参数：textcard，toUser or toUserList，agentId,CORP_ID，CORP_SECRET
+     *
+     * @param req
+     * @return
+     * @throws Exception
+     */
+    public static QywxMessageVo sendTextCardMessage(QywxMessageRequest req) throws Exception {
+        QywxMessageRequest paramReq = req.getParamReq();
+        if (ObjectUtils.isEmpty(paramReq.getAgentid())) {
+            throw new Exception("no agentId!");
+        }
+
+        if (ObjectUtils.isEmpty(paramReq.getTextcard())) {
+            throw new Exception("no message content or no TextCard!");
+        }
+
+        if (ObjectUtils.isEmpty(req.getToUserList()) && ObjectUtils.isEmpty(req.getTouser())) {
+            throw new Exception("need toUser or toUserList");
+        }
+
+        QywxMessageVo messageVo = sendMessage(paramReq);
+        return messageVo;
+    }
+
+    private static QywxMessageVo sendMessage(QywxMessageRequest paramReq) throws Exception {
         QywxAccessTokenVo accessToken = getQywxAccessToken(paramReq);
 
         OkHttpClient client = new OkHttpClient();
