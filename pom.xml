@@ -7,7 +7,7 @@
 
     <groupId>io.github.sheng91666</groupId>
     <artifactId>sometool</artifactId>
-    <version>1.0.1-RELEASE</version>
+    <version>1.0.2-RELEASE</version>
     <name>sometool</name>
     <url>https://github.com/sheng91666/sometool</url>
     <description>工作中用的一些工具</description>
@@ -24,7 +24,6 @@
     <modules>
         <module>sometool-core</module>
         <module>sometool-notification</module>
-        <module>sometool-all</module>
     </modules>
 
     <developers>
