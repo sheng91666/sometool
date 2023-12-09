@@ -5,6 +5,7 @@ import com.sometool.dto.request.QywxMessageRequest;
 import com.sometool.dto.request.QywxRequest;
 import com.sometool.dto.vo.QywxAccessTokenVo;
 import com.sometool.dto.vo.QywxMessageVo;
+import com.sometool.dto.vo.QywxUserInfoVo;
 import okhttp3.*;
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -125,22 +126,27 @@ public class QywxService {
     }
 
 
-//    public QywxUserInfoVo getUserInfo(QywxRequest req) throws Exception {
-//        String url = String.format("https://qyapi.weixin.qq.com/cgi-bin/auth/getuserinfo?access_token=%s&code=%s", req.getAccessToken(), req.getCode());
-//        QywxUserInfoVo userInfoVo = new QywxUserInfoVo();
-//        OkHttpClient client = new OkHttpClient();
-//        Request request = new Request.Builder()
-//                .url(url)
-//                .get()
-//                .build();
-//        Response response = client.newCall(request).execute();
-//        if (200 == response.code()) {
-//            userInfoVo = JSON.parseObject(response.body().string(), QywxUserInfoVo.class);
-//        } else {
-//            userInfoVo.setErrmsg(response.message());
-//            userInfoVo.setErrcode(response.code());
-//        }
-//        return userInfoVo;
-//    }
+    public QywxUserInfoVo getUserInfo(QywxRequest req, String code) throws Exception {
+        QywxAccessTokenVo tokenVo = getQywxAccessToken(req);
+        if (ObjectUtils.isEmpty(tokenVo.getAccess_token())) {
+            throw new Exception(tokenVo.getErrmsg());
+        }
+
+        String url = String.format("https://qyapi.weixin.qq.com/cgi-bin/auth/getuserinfo?access_token=%s&code=%s", tokenVo.getAccess_token(), code);
+        QywxUserInfoVo userInfoVo = new QywxUserInfoVo();
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+        Response response = client.newCall(request).execute();
+        if (200 == response.code()) {
+            userInfoVo = JSON.parseObject(response.body().string(), QywxUserInfoVo.class);
+        } else {
+            userInfoVo.setErrmsg(response.message());
+            userInfoVo.setErrcode(response.code());
+        }
+        return userInfoVo;
+    }
 
 }
