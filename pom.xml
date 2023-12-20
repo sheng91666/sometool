@@ -24,6 +24,7 @@
     <modules>
         <module>sometool-core</module>
         <module>sometool-notification</module>
+        <module>sometool-linux</module>
     </modules>
 
     <developers>
