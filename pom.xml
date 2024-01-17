@@ -25,6 +25,7 @@
         <module>sometool-core</module>
         <module>sometool-notification</module>
         <module>sometool-linux</module>
+        <module>sometool-cloud-tencent</module>
     </modules>
 
     <developers>
