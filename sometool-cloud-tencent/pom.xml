@@ -30,5 +30,11 @@
             <artifactId>sometool-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+            <version>3.1.936</version>
+        </dependency>
     </dependencies>
 </project>
