@@ -96,6 +96,11 @@ public class TencentSqlServerUtils {
         return resp;
     }
 
+    /**
+     * 查询可用区
+     * @param command
+     * @return
+     */
     public List<ZoneInfo> DescribeZones(CloudApiCommand command) {
         List<ZoneInfo> result = new ArrayList<>();
         try {
@@ -110,6 +115,11 @@ public class TencentSqlServerUtils {
         return result;
     }
 
+    /**
+     * 查询配置
+     * @param command
+     * @return
+     */
     public List<SpecInfo> DescribeProductConfig(CloudApiCommand command) {
         DescribeProductConfigResponse resp = new DescribeProductConfigResponse();
         try {
@@ -125,6 +135,11 @@ public class TencentSqlServerUtils {
         return new ArrayList<>(Arrays.asList(resp.getSpecInfoList()));
     }
 
+    /**
+     * 查询规格可售状态
+     * @param command
+     * @return
+     */
     public List<SpecSellStatus> DescribeSpecSellStatus(DescribeSpecSellStatusCommand command) {
         DescribeSpecSellStatusResponse resp = new DescribeSpecSellStatusResponse();
         try {

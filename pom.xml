@@ -26,6 +26,7 @@
         <module>sometool-notification</module>
         <module>sometool-linux</module>
         <module>sometool-cloud-tencent</module>
+        <module>sometool-cloud-huawei</module>
     </modules>
 
     <developers>
