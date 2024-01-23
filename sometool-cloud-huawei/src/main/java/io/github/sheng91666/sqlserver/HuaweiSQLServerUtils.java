@@ -50,7 +50,7 @@ public class HuaweiSQLServerUtils {
             int offset = 0;
             int limit = 50;
 
-            while (flag) {
+            do {
                 ListInstancesRequest request = new ListInstancesRequest();
                 request.withOffset(offset);
                 request.withLimit(limit);
@@ -75,7 +75,8 @@ public class HuaweiSQLServerUtils {
                     e.printStackTrace();
                     logger.error("HuaweiMysqlUtils--getMysqlInstances--失败:{}", e.getMessage());
                 }
-            }
+
+            } while (flag);
             hashMap.put(item, instances);
         });
         return hashMap;
