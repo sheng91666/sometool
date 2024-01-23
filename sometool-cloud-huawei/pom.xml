@@ -19,10 +19,102 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.github.sheng91666</groupId>
+            <artifactId>sometool-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-bss</artifactId>
+            <version>3.1.63</version>
+        </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-gaussdb</artifactId>
+            <version>3.1.27</version>
+        </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-rds</artifactId>
+            <version>3.1.27</version>
+        </dependency>
+        <!-- kafka -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-kafka</artifactId>
+            <version>3.1.63</version>
+        </dependency>
+        <!-- rms -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-rms</artifactId>
+            <version>3.1.41</version>
+        </dependency>
+        <!-- eps -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-eps</artifactId>
+            <version>3.1.41</version>
+        </dependency>
+        <!-- vpc -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-vpc</artifactId>
+            <version>3.1.41</version>
+        </dependency>
+        <!-- eip -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-eip</artifactId>
+            <version>3.1.41</version>
+        </dependency>
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-rabbitmq</artifactId>
+            <version>3.1.43</version>
+        </dependency>
+        <!-- rocketmq -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-rocketmq</artifactId>
+            <version>3.1.76</version>
+        </dependency>
+        <!-- dcs -->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-dcs</artifactId>
+            <version>3.1.42</version>
+        </dependency>
+        <!--dds-->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-dds</artifactId>
+            <version>3.1.77</version>
+        </dependency>
+        <!--kms-->
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-kms</artifactId>
+            <version>3.1.44</version>
+        </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-rds</artifactId>
+            <version>3.1.75-patch</version>
+        </dependency>
+        <dependency>
+            <groupId>com.huaweicloud.sdk</groupId>
+            <artifactId>huaweicloud-sdk-ces</artifactId>
+            <version>3.1.76</version>
+        </dependency>
     </dependencies>
+
 </project>
