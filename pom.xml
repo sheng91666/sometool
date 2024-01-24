@@ -27,6 +27,7 @@
         <module>sometool-linux</module>
         <module>sometool-cloud-tencent</module>
         <module>sometool-cloud-huawei</module>
+        <module>sometool-jenkins</module>
     </modules>
 
     <developers>
