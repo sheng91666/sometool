@@ -33,7 +33,7 @@ public class HuaweiSQLServerUtils {
 
         RdsClient client = RdsClient.newBuilder()
                 .withCredential(auth)
-                .withRegion(RdsRegion.valueOf(command.getRegion()))
+                .withRegion(RdsRegion.valueOf(command.getRegionId()))
                 .build();
         return client;
     }
@@ -58,7 +58,7 @@ public class HuaweiSQLServerUtils {
                     request.setId(command.getInstanceId());
                 }
                 try {
-                    command.setRegion(item);
+                    command.setRegionId(item);
                     ListInstancesResponse response = getRdsClient(command).listInstances(request);
                     instances.addAll(response.getInstances());
 

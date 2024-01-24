@@ -15,8 +15,8 @@ public class CloudApiCommand extends BaseCommand {
     private String sk;
     private String endPoint;
 
-    private String region;
     private String regionId;
+    private String regionName;
     private List<String> regionIds;
 
     private String instanceId;
@@ -55,4 +55,17 @@ public class CloudApiCommand extends BaseCommand {
         this.regionIds = regionIds;
     }
 
+    public CloudApiCommand toCommand() {
+        CloudApiCommand command = new CloudApiCommand();
+        command.setCloud(this.cloud);
+        command.setAk(this.ak);
+        command.setSk(this.sk);
+        command.setInstanceId(this.instanceId);
+        command.setInstanceIds(this.instanceIds);
+        command.setRegionId(this.regionId);
+        command.setRegionName(this.regionName);
+        command.setRegionIds(this.regionIds);
+
+        return command;
+    }
 }

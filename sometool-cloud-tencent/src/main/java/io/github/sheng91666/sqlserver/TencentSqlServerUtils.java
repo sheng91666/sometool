@@ -4,7 +4,6 @@ package io.github.sheng91666.sqlserver;
 import com.alibaba.fastjson.JSON;
 import com.sometool.command.CloudApiCommand;
 import com.sometool.exception.STException;
-import com.sometool.util.BeanCopyUtils;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
@@ -33,7 +32,7 @@ public class TencentSqlServerUtils {
         httpProfile.setEndpoint("sqlserver.tencentcloudapi.com");
         ClientProfile clientProfile = new ClientProfile();
         clientProfile.setHttpProfile(httpProfile);
-        SqlserverClient sqlserverClient = new SqlserverClient(cred, command.getRegion(), clientProfile);
+        SqlserverClient sqlserverClient = new SqlserverClient(cred, command.getRegionId(), clientProfile);
         return sqlserverClient;
     }
 
@@ -59,7 +58,7 @@ public class TencentSqlServerUtils {
                         req.setInstanceIdSet(command.getInstanceIds());
                     }
 
-                    command.setRegion(region);
+                    command.setRegionId(region);
                     DescribeDBInstancesResponse resp = getSqlserverClient(command).DescribeDBInstances(req);
                     regionAllIns.addAll(Arrays.asList(resp.getDBInstances()));
 
@@ -98,6 +97,7 @@ public class TencentSqlServerUtils {
 
     /**
      * 查询可用区
+     *
      * @param command
      * @return
      */
@@ -117,6 +117,7 @@ public class TencentSqlServerUtils {
 
     /**
      * 查询配置
+     *
      * @param command
      * @return
      */
@@ -137,20 +138,14 @@ public class TencentSqlServerUtils {
 
     /**
      * 查询规格可售状态
+     *
      * @param command
      * @return
      */
     public List<SpecSellStatus> DescribeSpecSellStatus(DescribeSpecSellStatusCommand command) {
         DescribeSpecSellStatusResponse resp = new DescribeSpecSellStatusResponse();
         try {
-            DescribeSpecSellStatusRequest req = new DescribeSpecSellStatusRequest();
-            req.setZone(command.getZone());
-            req.setSpecIdSet(command.getSpecIds().toArray(new Long[]{}));
-            req.setDBVersion(command.getDbVersion());
-            req.setPid(command.getPid());
-            req.setPayMode(command.getPayMode());
-            req.setCurrency(command.getCurrency());
-            resp = getSqlserverClient(command).DescribeSpecSellStatus(req);
+            resp = getSqlserverClient(command).DescribeSpecSellStatus(command.toReq());
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("SpecSellStatus--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
@@ -191,10 +186,7 @@ public class TencentSqlServerUtils {
     public CreateDBInstancesResponse CreateDBInstances(CreateDBInstancesCommand command) {
         CreateDBInstancesResponse resp = new CreateDBInstancesResponse();
         try {
-            CreateDBInstancesRequest req = new CreateDBInstancesRequest();
-            BeanCopyUtils.copyByCglibBeanCopier(req, command);
-            req.setDBVersion(command.getDbVersion());
-            resp = getSqlserverClient(command).CreateDBInstances(req);
+            resp = getSqlserverClient(command).CreateDBInstances(command.toReq());
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("CreateDBInstances--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
@@ -213,10 +205,7 @@ public class TencentSqlServerUtils {
     public CreateBasicDBInstancesResponse CreateBasicDBInstances(CreateBasicDBInstancesCommand command) {
         CreateBasicDBInstancesResponse resp = new CreateBasicDBInstancesResponse();
         try {
-            CreateBasicDBInstancesRequest req = new CreateBasicDBInstancesRequest();
-            BeanCopyUtils.copyByCglibBeanCopier(req, command);
-            req.setDBVersion(command.getDbVersion());
-            resp = getSqlserverClient(command).CreateBasicDBInstances(req);
+            resp = getSqlserverClient(command).CreateBasicDBInstances(command.toReq());
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("CreateBasicDBInstances--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
@@ -235,10 +224,7 @@ public class TencentSqlServerUtils {
     public CreateCloudDBInstancesResponse CreateCloudDBInstances(CreateCloudDBInstancesCommand command) {
         CreateCloudDBInstancesResponse resp = new CreateCloudDBInstancesResponse();
         try {
-            CreateCloudDBInstancesRequest req = new CreateCloudDBInstancesRequest();
-            BeanCopyUtils.copyByCglibBeanCopier(req, command);
-            req.setDBVersion(command.getDbVersion());
-            resp = getSqlserverClient(command).CreateCloudDBInstances(req);
+            resp = getSqlserverClient(command).CreateCloudDBInstances(command.toReq());
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("CreateCloudDBInstances--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
@@ -259,9 +245,7 @@ public class TencentSqlServerUtils {
     public DescribeInstanceByOrdersResponse DescribeInstanceByOrders(DescribeInstanceByOrdersCommand command) {
         DescribeInstanceByOrdersResponse resp = new DescribeInstanceByOrdersResponse();
         try {
-            DescribeInstanceByOrdersRequest req = new DescribeInstanceByOrdersRequest();
-            req.setDealNames(command.getDealNames().toArray(new String[]{}));
-            resp = getSqlserverClient(command).DescribeInstanceByOrders(req);
+            resp = getSqlserverClient(command).DescribeInstanceByOrders(command.toReq());
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("DescribeInstanceByOrders--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
@@ -281,10 +265,7 @@ public class TencentSqlServerUtils {
     public ModifyDBInstanceNameResponse ModifyDBInstanceName(ModifyDBInstanceNameCommand command) {
         ModifyDBInstanceNameResponse resp = new ModifyDBInstanceNameResponse();
         try {
-            ModifyDBInstanceNameRequest req = new ModifyDBInstanceNameRequest();
-            req.setInstanceId(command.getInstanceId());
-            req.setInstanceName(command.getInstanceName());
-            resp = getSqlserverClient(command).ModifyDBInstanceName(req);
+            resp = getSqlserverClient(command).ModifyDBInstanceName(command.toReq());
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("ModifyDBInstanceName--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
@@ -305,21 +286,7 @@ public class TencentSqlServerUtils {
     public UpgradeDBInstanceResponse UpgradeDBInstance(UpgradeDBInstanceCommand command) {
         UpgradeDBInstanceResponse resp = new UpgradeDBInstanceResponse();
         try {
-            UpgradeDBInstanceRequest req = new UpgradeDBInstanceRequest();
-            req.setInstanceId(command.getInstanceId());
-            req.setMemory(command.getMemory());
-            req.setStorage(command.getStorage());
-            req.setCpu(command.getCpu());
-            req.setDBVersion(command.getDbVersion());
-            if (!ObjectUtils.isEmpty(command.getHAType())) {
-                req.setHAType(command.getHAType());
-            }
-            if (!ObjectUtils.isEmpty(command.getMultiZones())) {
-                req.setMultiZones(command.getMultiZones());
-            }
-            req.setWaitSwitch(command.getWaitSwitch());
-            resp = getSqlserverClient(command).UpgradeDBInstance(req);
-
+            resp = getSqlserverClient(command).UpgradeDBInstance(command.toReq());
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("UpgradeDBInstance--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
