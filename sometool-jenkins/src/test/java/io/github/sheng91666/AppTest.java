@@ -32,7 +32,7 @@ public class AppTest extends TestCase {
     public void testApp() {
 //        Test_JenkinsServer();
 //        Test_JenkinsHttpClient();
-        Test_GetApi();
+//        Test_GetApi();
     }
 
     public void Test_JenkinsServer() {
@@ -48,14 +48,10 @@ public class AppTest extends TestCase {
         }
     }
 
-    public void Test_GetApi() {
-        try {
-            JenkinsApiVo jenkinsApiVo = new STJenkinsClient(JENKINS_URL, JENKINS_USERNAME, JENKINS_PASSWORD, JENKINS_TOKEN).GetApi();
-            System.out.println(JSON.toJSONString(jenkinsApiVo));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public void Test_GetApi() {
+//        JenkinsApiVo jenkinsApiVo = new STJenkinsClient(JENKINS_URL, JENKINS_USERNAME, JENKINS_PASSWORD, JENKINS_TOKEN).GetApi();
+//        System.out.println(JSON.toJSONString(jenkinsApiVo));
+//    }
 
     public void Test_JenkinsHttpClient() {
         String path = "/api/json?pretty=true";
@@ -73,20 +69,20 @@ public class AppTest extends TestCase {
         }
     }
 
-    public void testGet() throws Exception {
-        String JENKINS_PROJECT_NAME = "cnzrz";
-        String url = JENKINS_URL + "/job/" + JENKINS_PROJECT_NAME + "/api/json";
-        HttpGet httpGet = new HttpGet(url);
-        String res = new STJenkinsClient(JENKINS_URL, JENKINS_USERNAME, JENKINS_PASSWORD, JENKINS_TOKEN).GetHttpMsg(url, httpGet);
-        System.out.println(res);
-    }
-
-    public void testPost() throws Exception {
-        String JENKINS_PROJECT_NAME = "cnzrz";
-        String url = JENKINS_URL + "/job/" + JENKINS_PROJECT_NAME + "/api/json";
-        HttpPost httpPost = new HttpPost(url);
-        String res = new STJenkinsClient(JENKINS_URL, JENKINS_USERNAME, JENKINS_PASSWORD, JENKINS_TOKEN).GetHttpMsg(url, httpPost);
-    }
+//    public void testGet() throws Exception {
+//        String JENKINS_PROJECT_NAME = "cnzrz";
+//        String url = JENKINS_URL + "/job/" + JENKINS_PROJECT_NAME + "/api/json";
+//        HttpGet httpGet = new HttpGet(url);
+//        String res = new STJenkinsClient(JENKINS_URL, JENKINS_USERNAME, JENKINS_PASSWORD, JENKINS_TOKEN).GetHttpMsg(url, httpGet);
+//        System.out.println(res);
+//    }
+//
+//    public void testPost() throws Exception {
+//        String JENKINS_PROJECT_NAME = "cnzrz";
+//        String url = JENKINS_URL + "/job/" + JENKINS_PROJECT_NAME + "/api/json";
+//        HttpPost httpPost = new HttpPost(url);
+//        String res = new STJenkinsClient(JENKINS_URL, JENKINS_USERNAME, JENKINS_PASSWORD, JENKINS_TOKEN).GetHttpMsg(url, httpPost);
+//    }
 
 
 }

@@ -125,7 +125,7 @@ public class STAbstractClient {
         if (okRsp.code() != STAbstractClient.HTTP_RSP_OK) {
             String msg = "response code is " + okRsp.code() + ", not 200";
             log.info(msg);
-            throw new STException(msg, "", "ServerSideError");
+            throw new STException(msg, "ServerSideError");
         }
         return okRsp;
     }
@@ -220,7 +220,6 @@ public class STAbstractClient {
             }
             throw new STException(
                     errResp.response.getError().getMessage(),
-                    errResp.response.getRequestId(),
                     errResp.response.getError().getCode());
         }
 

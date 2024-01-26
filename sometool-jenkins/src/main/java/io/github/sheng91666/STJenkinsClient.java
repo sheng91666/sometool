@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.offbytwo.jenkins.JenkinsServer;
 import com.offbytwo.jenkins.client.JenkinsHttpClient;
-import com.sometool.exception.STException;
 import io.github.sheng91666.vo.JenkinsApiVo;
 import io.github.sheng91666.vo.WorkflowJobVo;
 import org.apache.commons.lang3.ObjectUtils;
@@ -23,7 +22,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -57,7 +55,7 @@ public class STJenkinsClient {
             try {
                 jenkinsHttpClient = new JenkinsHttpClient(new URI(JENKINS_URL), JENKINS_USERNAME, JENKINS_PASSWORD);
             } catch (URISyntaxException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
         return jenkinsHttpClient;
@@ -88,29 +86,35 @@ public class STJenkinsClient {
      * @param httpRequest 请求方法对象
      * @return
      */
-    public String GetHttpMsg(String url, HttpRequest httpRequest) throws URISyntaxException, IOException {
-        URI uri = new URI(url);
-        HttpHost host = new HttpHost(uri.getHost(), uri.getPort());
-        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        // 这边需要注意一下是使用的token代替了密码
-        credentialsProvider.setCredentials(new AuthScope(uri.getHost(), uri.getPort()), new UsernamePasswordCredentials(JENKINS_USERNAME, JENKINS_TOKEN));
-        AuthCache authCache = new BasicAuthCache();
-        BasicScheme basicScheme = new BasicScheme();
-        authCache.put(host, basicScheme);
-        try (CloseableHttpClient httpClient = HttpClients.custom().setDefaultCredentialsProvider(credentialsProvider).build()) {
-            HttpClientContext httpClientContext = HttpClientContext.create();
-            httpClientContext.setAuthCache(authCache);
-            CloseableHttpResponse response = httpClient.execute(host, httpRequest, httpClientContext);
-            return EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+    public String GetHttpMsg(String url, HttpRequest httpRequest) {
+        if (ObjectUtils.isEmpty(url)) {
+            throw new IllegalArgumentException("url may not be null");
+        }
+
+        try {
+            URI uri = new URI(url);
+            HttpHost httpHost = new HttpHost(uri.getHost(), uri.getPort());
+            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(new AuthScope(uri.getHost(), uri.getPort()), new UsernamePasswordCredentials(JENKINS_USERNAME, JENKINS_TOKEN));
+            AuthCache authCache = new BasicAuthCache();
+            BasicScheme basicScheme = new BasicScheme();
+            authCache.put(httpHost, basicScheme);
+            try (CloseableHttpClient httpClient = HttpClients.custom().setDefaultCredentialsProvider(credentialsProvider).build()) {
+                HttpClientContext httpClientContext = HttpClientContext.create();
+                httpClientContext.setAuthCache(authCache);
+                CloseableHttpResponse response = httpClient.execute(httpHost, httpRequest, httpClientContext);
+                return EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-
     // 获取job列表、view列表  /api/json?pretty=true
-    public JenkinsApiVo GetApi() throws STException {
+    public JenkinsApiVo GetApi() {
         JenkinsApiVo resultVo = new JenkinsApiVo();
         try {
-            String str = GetJenkinsHttpClient().get("/api/json?pretty=true");
+            String str = GetJenkinsHttpClient().get(STJenkinsContacts.API_LIST_PATH);
             JSONObject jsonObject = JSONObject.parseObject(str);
 
             if (!ObjectUtils.isEmpty(jsonObject.get("jobs"))) {
@@ -127,21 +131,20 @@ public class STJenkinsClient {
             resultVo.setUseCrumbs(Boolean.valueOf(String.valueOf(jsonObject.get("useCrumbs"))));
             resultVo.setUseSecurity(Boolean.valueOf(String.valueOf(jsonObject.get("useSecurity"))));
         } catch (Exception e) {
-            throw new STException("STJenkins--GetApi--error", e);
+            throw new RuntimeException(e);
         }
         return resultVo;
     }
 
 
     // 获取指定job的详细信息 build 集合 /job/cnzrz/api/json
-
     //  获取指定job，buildNumber的build详细信息 /job/cnzrz/17/api/json
-
     // 获取指定job，buildNumber的日志 /job/cnzrz/17/consoleText/api/json
-
 
     /**
      * 获取特定job和build信息的API请求。 /job/cnzrz/17/api/json?depth=3
      * depth=3：这是一个查询参数，表示返回结果的深度。在这个例子中，深度为3，意味着返回的结果将包含所有级别的信息，例如构建步骤、构建参数等。
      */
+
+
 }
