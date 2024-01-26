@@ -8,7 +8,7 @@ import com.huaweicloud.sdk.rds.v3.RdsClient;
 import com.huaweicloud.sdk.rds.v3.model.*;
 import com.huaweicloud.sdk.rds.v3.region.RdsRegion;
 import com.sometool.command.CloudApiCommand;
-import com.sometool.exception.STException;
+import com.sometool.exception.STRunTimeException;
 import io.github.sheng91666.sqlserver.commond.ListEngineFlavorsCommand;
 import io.github.sheng91666.sqlserver.commond.ListStorageTypesCommand;
 import io.github.sheng91666.sqlserver.commond.StartInstanceEnlargeVolumeActionCommand;
@@ -95,7 +95,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("listDatastores--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return dataStores;
     }
@@ -114,7 +114,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("ListFlavors--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return flavors;
     }
@@ -135,7 +135,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("ListStorageTypes--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return storageType;
     }
@@ -152,7 +152,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("ListConfigurations--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return summaryList;
     }
@@ -173,7 +173,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("ListEngineFlavors--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return response;
     }
@@ -191,7 +191,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("CreateInstance--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return response;
     }
@@ -208,7 +208,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("DeleteInstance--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return response;
     }
@@ -216,7 +216,7 @@ public class HuaweiSQLServerUtils {
     /**
      * 变更规格
      */
-    public StartResizeFlavorActionResponse StartResizeFlavorAction(StartResizeFlavorActionCommand command) throws STException {
+    public StartResizeFlavorActionResponse StartResizeFlavorAction(StartResizeFlavorActionCommand command) throws STRunTimeException {
         StartResizeFlavorActionResponse response = new StartResizeFlavorActionResponse();
         StartResizeFlavorActionRequest request = new StartResizeFlavorActionRequest();
         request.withInstanceId(command.getInstanceId());
@@ -230,7 +230,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("StartResizeFlavorAction--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return response;
     }
@@ -252,7 +252,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("StartInstanceEnlargeVolumeAction--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return response;
     }
@@ -273,7 +273,7 @@ public class HuaweiSQLServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("ListCollations--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return response;
     }

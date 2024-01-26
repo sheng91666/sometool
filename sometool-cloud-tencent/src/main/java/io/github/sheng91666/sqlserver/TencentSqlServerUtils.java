@@ -3,7 +3,7 @@ package io.github.sheng91666.sqlserver;
 
 import com.alibaba.fastjson.JSON;
 import com.sometool.command.CloudApiCommand;
-import com.sometool.exception.STException;
+import com.sometool.exception.STRunTimeException;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
@@ -90,7 +90,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("RecycleDBInstance--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return resp;
     }
@@ -110,7 +110,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("DescribeZones--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return result;
     }
@@ -131,7 +131,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("DescribeProductConfig--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return new ArrayList<>(Arrays.asList(resp.getSpecInfoList()));
     }
@@ -149,7 +149,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("SpecSellStatus--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return new ArrayList<>(Arrays.asList(resp.getDescribeSpecSellStatusSet()));
     }
@@ -170,7 +170,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("DescribeCollationTimeZone--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return resp;
     }
@@ -190,7 +190,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("CreateDBInstances--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return resp;
     }
@@ -209,7 +209,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("CreateBasicDBInstances--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return resp;
     }
@@ -228,7 +228,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("CreateCloudDBInstances--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
 
         return resp;
@@ -249,7 +249,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("DescribeInstanceByOrders--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return resp;
     }
@@ -269,7 +269,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("ModifyDBInstanceName--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
 
         return resp;
@@ -290,7 +290,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("UpgradeDBInstance--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return resp;
     }
@@ -313,7 +313,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("TerminateDBInstance--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
 
         return resp;
@@ -337,7 +337,7 @@ public class TencentSqlServerUtils {
         } catch (Exception e) {
             e.printStackTrace();
             String msg = String.format("DeleteDBInstance--失败--参数=%s 失败原因=%s ", JSON.toJSONString(command), e.getMessage());
-            throw new STException(msg);
+            throw new STRunTimeException(msg);
         }
         return resp;
     }
