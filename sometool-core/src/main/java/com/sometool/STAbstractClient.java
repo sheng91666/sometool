@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class STAbstractClient {
+public abstract class STAbstractClient {
     public static final int HTTP_RSP_OK = 200;
     public Gson gson;
     private STCredential credential;
